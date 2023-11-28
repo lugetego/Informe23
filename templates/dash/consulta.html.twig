@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Consulta -->
+            <div class="col-xl-12 col-sm-12 col-md-12 mt-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Inicio</a></li>
+                        <li class="breadcrumb-item active">Informe {{ informe.anio  }} y Plan de trabajo {{ informe.anio + 1 }}</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="col-xl-6 col-sm-12 col-md-6 mt-4">
+                <div class="card ">
+                    <div class="card-body">
+                        <h1 class="h3 mb-0 text-gray-800 mb-2">Informe de actividades {{ informe.anio }}</h1>
+                        <div>
+                            <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-light btn-icon-split btn-sm ">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-print"></i>
+                                        </span>
+                                <span class="text">Vista previa</span>
+                            </a>
+                            <a href="{{ path('informe_pdf',{'anio':informe.anio}) }}" class="btn btn-light btn-icon-split btn-sm my-2">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                <span class="text">Versión PDF</span>
+                            </a>
+                            {% if informe.enviado == 1 %}
+                                <span class="badge badge-pill badge-success">{{ informe.dictamen }}</span>
+                            {% else %}
+                                <span class="badge badge-pill badge-warning">No enviado</span>
+                            {% endif %}
+                            {% if informe.observaciones != null %}
+                                <p class="text-justify pt-2"><strong>Observaciones:</strong> <em>{{ informe.observaciones }}</em></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-sm-12 col-md-6 mt-4">
+                <div class="card ">
+                    <div class="card-body">
+                        <h1 class="h3 mb-0 text-gray-800 mb-2">Plan de trabajo {{ informe.anio + 1  }}</h1>
+                        <div>
+                            <a href="#" data-toggle="modal" data-target="#myModal3" class="btn btn-light btn-icon-split btn-sm ">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-print"></i>
+                                        </span>
+                                <span class="text">Vista previa</span>
+                            </a>
+                            <a href="{{ path('plan_pdf',{'anio':informe.anio + 1  }) }}" class="btn btn-light btn-icon-split btn-sm my-2">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                <span class="text">Versión PDF</span>
+                            </a>
+                            {% if plan.enviado == 1 %}
+                                <span class="badge badge-pill badge-success">{{ informe.dictamen }}</span>
+                            {% else %}
+                                <span class="badge badge-pill badge-warning">No enviado</span>
+                            {% endif %}
+                            {% if informe.observaciones != null %}
+                                <p class="text-justify pt-2"><strong>Observaciones:</strong> <em>{{ informe.observaciones }}</em></p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal informe -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Vista previa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ render(path('informe_show', {'id': informe.id}) ) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal plan -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Vista previa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if plan.id is defined %}
+                        {{ render(path('plan_show', {'id': plan.id}) ) }}
+                    {% else %}
+                        <p class="text-danger"> No se ha creado el plan de trabajo.</p>
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

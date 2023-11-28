@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}CCM - Dashboard{% endblock %}
+
+{% block main %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Inicio</a></li>
+            <li class="breadcrumb-item active">No existe información</li>
+        </ol>
+    </nav>
+    <div class="jumbotron py-2">
+        <div class="container">
+            <h1 class="display-4">No existe información</h1>
+            <p class="lead">El sistema no tiene información registrada sobre tu consulta.</p>
+            <a href="{{ path('dashboard') }}">Regresar</a>
+        </div>
+    </div>
+{% endblock %}
