@@ -171,10 +171,10 @@
             {% if informe.comentarios|length > 0 %}
                 <div class="text-gray-900 pb-1 bg-gray-100"><small>Comentarios</small></div>
 
-                    {% for otro in informe.otros %}
+                    {% for comentario in informe.comentarios %}
                         <small>
 
-                                {{ otro.actividad}}
+                            {{ comentario.comentarios|nl2br}}
 
                         </small>
                     {% endfor %}
