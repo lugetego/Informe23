@@ -170,7 +170,15 @@
 
             {% if informe.comentarios|length > 0 %}
                 <div class="text-gray-900 pb-1 bg-gray-100"><small>Comentarios</small></div>
-                <p class="text-justify text-gray-900">{{ informe.comentarios|nl2br }}</p>
+
+                    {% for otro in informe.otros %}
+                        <small>
+
+                                {{ otro.actividad}}
+
+                        </small>
+                    {% endfor %}
+
             {% endif %}
 
             {% if is_granted("ROLE_ADMIN") %}

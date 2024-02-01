@@ -49,7 +49,7 @@ class Productividad
     /**
      * @var string
      *
-     * @ORM\Column(name="autores", type="text", nullable=true)
+     * @ORM\Column(name="autores", type="text", length=65535, nullable=true)
      */
     private $autores;
 
