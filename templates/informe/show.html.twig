@@ -156,5 +156,17 @@
                 </ol>
             {% endif %}
         </div>
+        <div>
+            <strong>Comentarios</strong><br>
+            {% if informe.comentarios|length == 0 %}
+                <p class="text-danger">No se registró información</p>
+            {% else %}
+                {% for comentario in informe.comentarios %}
+                    {% if comentario.comentarios %}
+                        {{ comentario.comentarios|nl2br }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 </div>

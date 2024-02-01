@@ -3,32 +3,32 @@
 {% block main %}
     <div class="container-fluid">
         <div class="row">
-            <!-- Otros -->
+            <!-- Comentarios -->
             <div class="col-xl-12 col-sm-12 col-md-12 mt-4">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ path('dashboard') }}">Inicio</a></li>
-                        <li class="breadcrumb-item active">Informe - Otras actividades</li>
+                        <li class="breadcrumb-item active">Informe - Comentarios</li>
                     </ol>
                 </nav>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Otras actividades registradas del año {{ anual }}</h1>
-                    {% if enviado != true  %}
-                        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " data-toggle="modal" data-target="#otrosnewModal"><i class="fas fa-plus fa-sm text-white-50"></i> Nuevo registro</button>
+                    <h1 class="h3 mb-0 text-gray-800">Comentarios adicionales al informe del año {{ anual }}</h1>
+                    {% if enviado != true and comentarios|length <= 0 %}
+                        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " data-toggle="modal" data-target="#comentariosnewModal"><i class="fas fa-plus fa-sm text-white-50"></i> Nuevo registro</button>
                     {% endif %}
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="otrosnewModal" tabindex="-1" role="dialog" aria-labelledby="otrosnewModalLabel" aria-hidden="true">
+                <div class="modal fade" id="comentariosnewModal" tabindex="-1" role="dialog" aria-labelledby="comentariosnewModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="otrosnewModalLabel">Nuevo registro de actividad</h5>
+                                <h5 class="modal-title" id="comentariosnewModalLabel">Nuevo registro de comentarios</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {{ render(path('otros_new')) }}
+                                {{ render(path('comentarios_new')) }}
                             </div>
                         </div>
                     </div>
@@ -39,20 +39,19 @@
             <div class="col-xl-4 col-sm-12 col-md-4 mb-2">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Otras actividades</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Comentarios adicionales</h6>
                     </div>
                     <div class="card-body">
                         <p class="text-justify text-dark">
-                            En este rubro deberá reportar otras actividades relevantes
-                            dentro del periodo al que corresponde su informe y que no se ajuste a alguna de las categorías ya establecidas.</p>
+                            En este rubro podrá añadir comentarios al informe anual. Máximo 500 caracteres.</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-xl-8 col-md-8 col-sm-12 mb-2">
-                {% for otro in otros %}
-                    {% set otromodalshow = 'otroshowModal'~ otro.id  %}
-                    {% set otromodaledit = 'otroeditModal'~ otro.id  %}
+                {% for comentario in comentarios %}
+                    {% set comentariomodalshow = 'comentarioshowModal'~ comentario.id  %}
+                    {% set comentariomodaledit = 'comentarioeditModal'~ comentario.id  %}
 
                     <div class="card border-left-primary shadow mb-2">
                         <div class="card-body">
@@ -60,13 +59,13 @@
                                 <div class="col mr-2">
 
                                     <div class="h6 mb-1 font-weight-bold text-gray-800">
-                                        {{ otro.actividad }}
+                                        {{ comentario.comentarios|nl2br}}
                                         <p class="text-right">
                                             {% if enviado != 1 %}
-                                                <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#{{ otromodaledit }}" >
+                                                <button type="button" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#{{ comentariomodaledit }}" >
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#{{ otromodalshow }}">
+                                                <button type="button" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#{{ comentariomodalshow }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             {% endif %}
@@ -77,33 +76,33 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="{{ otromodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ otromodalshow }}Label">
+                    <div class="modal fade" id="{{ comentariomodalshow }}" tabindex="-1" role="dialog" aria-labelledby="{{ comentariomodalshow }}Label">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="{{ otromodalshow }}Label">Otra actvidad</h5>
+                                    <h5 class="modal-title" id="{{ comentariomodalshow }}Label">Nuevo comentario</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ render(path('otros_show', {'id': otro.id}) ) }}
+                                    {{ render(path('comentarios_show', {'id': comentario.id}) ) }}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="{{ otromodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ otromodaledit }}Label">
+                    <div class="modal fade" id="{{ comentariomodaledit }}" tabindex="-1" role="dialog" aria-labelledby="{{ comentariomodaledit }}Label">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="{{ otromodaledit }}Label">Otra actividad</h5>
+                                    <h5 class="modal-title" id="{{ comentariomodaledit }}Label">Modificar comentario</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ render(path('otros_edit', {'id': otro.id}) ) }}
+                                    {{ render(path('comentarios_edit', {'id': comentario.id}) ) }}
                                 </div>
                             </div>
                         </div>
@@ -116,3 +115,4 @@
 
     <!-- Fin Eventos -->
 {% endblock %}
+

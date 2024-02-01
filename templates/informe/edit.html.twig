@@ -9,7 +9,7 @@
                 {{ form_label(edit_form.dictamen) }}
             </div>
             <div>
-                {{ form_widget(edit_form.dictamen,{'attr': {'class': 'form-control input-sm', 'placeholder':'Autores'} } ) }}
+                {{ form_widget(edit_form.dictamen,{'attr': {'class': 'form-control input-sm', 'placeholder':'Dictamen'} } ) }}
             </div>
             <div>{{ form_errors(edit_form.dictamen) }}</div>
         </div>
@@ -43,4 +43,5 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
             {{ form_end(edit_form) }}
         </div>
+    </div>
 </form>

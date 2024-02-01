@@ -1,0 +1,42 @@
+{% form_theme form 'form_errors.html.twig' %}
+
+{{ form_start(form, {'action': path('comentarios_new')}) }}
+<form>
+    <div class="form-row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <div>
+                    {{ form_widget(form.comentarios,{'attr': {'class': 'form-control input-sm', 'placeholder':'Comentarios','rows' : '6' } } ) }}
+                </div>
+                <div>{{ form_errors(form.comentarios) }}</div>
+                <p id="demo"></p>
+                <div style="margin-top: 0.25rem; text-align: right" id="counter">0</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary" onclick="myFunction()">Guardar</button>
+        {{ form_end(form) }}
+    </div>
+</form>
+
+{% block head_js %}
+    <script>
+        function myFunction() {
+            document.getElementById("comentarios_comentarios").maxLength = "500";
+        }
+
+        const messageEle = document.getElementById('comentarios_comentarios');
+        const counterEle = document.getElementById('counter');
+
+        messageEle.addEventListener('input', function (e) {
+            const target = e.target;
+            // Get the `maxlength` attribute
+            const maxLength = 500;
+            // Count the current number of characters
+            const currentLength = target.value.length;
+            counterEle.innerHTML = `${currentLength}/${maxLength}`;
+        });
+    </script>
+{% endblock %}

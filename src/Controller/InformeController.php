@@ -100,8 +100,18 @@ class InformeController extends AbstractController
         $editForm = $this->createForm('App\Form\InformeType', $informe);
         $editForm->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
+
+        $plan = $em->getRepository('App:Plan')->findOneByAnio($informe->getAnio()+1,$informe->getAcademico()->getId());
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            if ($informe->isEnviado() == null ){
+                $plan->setEnviado(null);
+                $this->getDoctrine()->getManager()->flush();
+            }
 
             //return $this->redirectToRoute('informe_edit', array('id' => $informe->getId()));
             return $this->redirectToRoute('dashboard');

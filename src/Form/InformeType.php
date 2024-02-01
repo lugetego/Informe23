@@ -17,7 +17,7 @@ class InformeType extends AbstractType
             ->add('enviado', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
                 'choices'=>array(
                     'Si'=>true,
-                    'No'=>false),
+                    'No'=>null),
                 'expanded'=>true,
                 'required'=>true,
                 'label'=>'Informe y plan de trabajo enviados',

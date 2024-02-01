@@ -97,7 +97,7 @@
                 <div class="text-gray-900 pb-1 bg-gray-100"><small>Proyectos de investigación</small></div>
                 <ol>
                     {% for proyecto in informe.proyectos %}
-                        <small><li class="text-justify">{{ proyecto.nombre }}, <small>{{ proyecto.tipo|title }},<em> {{ proyecto.numero }}</small></em></li></small>
+                        <small><li class="text-justify">{{ proyecto.nombre }}, <small>{{ proyecto.tipo|title }},<em> {{ proyecto.numero }}</em></small></li></small>
                     {% endfor %}
                 </ol>
             {% endif %}
@@ -166,6 +166,11 @@
                         </small>
                     {% endfor %}
                 </ol>
+            {% endif %}
+
+            {% if informe.comentarios|length > 0 %}
+                <div class="text-gray-900 pb-1 bg-gray-100"><small>Comentarios</small></div>
+                <p class="text-justify text-gray-900">{{ informe.comentarios|nl2br }}</p>
             {% endif %}
 
             {% if is_granted("ROLE_ADMIN") %}

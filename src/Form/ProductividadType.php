@@ -80,6 +80,7 @@ class ProductividadType extends AbstractType
                 'label'=>'*Status',
                 'choices'=>array(
                     'Aceptado'=>'Aceptado',
+                    'En desarrollo'=>'En desarrollo',
                     'Enviado'=>'Enviado',
                     'Publicado'=>'Publicado',
                 ),

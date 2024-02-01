@@ -131,6 +131,15 @@ class Informe
     private $otros;
 
     /**
+     * @var array $comentarios
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Comentarios", mappedBy="informe")
+     *
+     * The mappedBy attribute designates the field in the entity that is the owner of the relationship.
+     */
+    private $comentarios;
+
+    /**
      * @var array $tecnicos
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Tecnico", mappedBy="informe")
@@ -596,6 +605,39 @@ class Informe
     public function getPosdocs()
     {
         return $this->posdocs;
+    }
+
+    /**
+     * Add comentarios
+     *
+     * @param \App\Entity\Otros $comentarios
+     * @return Academico
+     */
+    public function addComentario(\App\Entity\Comentarios $comentarios)
+    {
+        $this->comentarios[] = $comentarios;
+
+        return $this;
+    }
+
+    /**
+     * Remove comentarios
+     *
+     * @param \App\Entity\Comentarios $comentarios
+     */
+    public function removeComentarios(\App\Entity\Comentarios $comentarios)
+    {
+        $this->estudiantes->removeElement($comentarios);
+    }
+
+    /**
+     * Get comentarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
     }
 
     /**
