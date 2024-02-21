@@ -72,7 +72,7 @@
                     {% for posdoc in informe.posdocs %}
                         <small>
                             <li class="text-justify text-gray-700">
-                                {{ posdoc.nombre |title }}, {{posdoc.programa }} <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
+                                {{ posdoc.nombre |title }}, {{posdoc.programa }}, <small>del {{ posdoc.inicio|localizeddate('long', 'none') }} al {{ posdoc.fin|localizeddate('long', 'none') }}</small>
                                 <br>
                             </li>
                         </small>
