@@ -52,7 +52,7 @@ class PosdocType extends AbstractType
                     'year' => 'Año',
                     'month' => 'Mes',
                     'day' => 'Día'),
-                'years'=> range(2021,2023),
+                'years'=> range(2021,2024),
                 'label'=>'*Fecha de término',
                 'required'=>true,
             ))
